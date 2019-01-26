@@ -4,39 +4,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Login">
+    tools:context=".Register">
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/username"
-        android:layout_marginTop="50dp"
-        android:hint="User Name"/>
+        android:hint="USername"
+        android:layout_marginTop="50dp"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/password"
-        android:hint="password"
+        android:hint="USerpassword"
         android:layout_marginTop="10dp"
         android:layout_below="@+id/username"/>
 
-    <Button
-        android:layout_width="wrap_content"
+    <EditText
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/password"
-        android:id="@+id/loginBtn"
-        android:layout_centerHorizontal="true"
-        android:text="Login"
-        android:layout_marginTop="10dp"/>
+        android:id="@+id/Number"
+        android:hint="MobileNumber"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/password"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/address"
+        android:hint="USerAddress"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/Number"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/registerBtn"
-        android:layout_below="@+id/loginBtn"
-        android:text="Register"
         android:layout_centerHorizontal="true"
-        />
+        android:layout_below="@+id/address"
+        android:hint="Register_to_Login"
+        android:layout_marginTop="20dp"/>
 
 </RelativeLayout>
