@@ -6,6 +6,7 @@ public interface HttpListner {
         LOGIN_SUCCESS,
         LOGIN_AUTHENTICATION_FAILURE,
         LOGIN_NETWORK_FAILURE,
+        REGISTER_SUCCESS,
         LOGIN_INTERNAL_ERROR,
         SUCCESS,
         FAILURE

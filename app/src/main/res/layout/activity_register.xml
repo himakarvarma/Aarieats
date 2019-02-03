@@ -10,14 +10,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/username"
-        android:hint="USername"
+        android:hint="Username"
         android:layout_marginTop="50dp"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/password"
-        android:hint="USerpassword"
+        android:hint="Password"
         android:layout_marginTop="10dp"
         android:layout_below="@+id/username"/>
 
@@ -33,7 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/address"
-        android:hint="USerAddress"
+        android:hint="UserAddress"
         android:layout_marginTop="10dp"
         android:layout_below="@+id/Number"/>
 
@@ -42,8 +42,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/registerBtn"
         android:layout_centerHorizontal="true"
+        android:text="Register"
         android:layout_below="@+id/address"
-        android:hint="Register_to_Login"
         android:layout_marginTop="20dp"/>
 
 </RelativeLayout>

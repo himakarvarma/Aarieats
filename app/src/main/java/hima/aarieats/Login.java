@@ -40,7 +40,8 @@ public class Login extends AppCompatActivity {
                     Toast.makeText(Login.this,"Please enter user name and password",Toast.LENGTH_LONG).show();
                 } else {
                     loginToServer(userName.getText().toString().trim(),password.getText().toString().trim());
-            }   }
+                }
+            }
         });
         registerBtn.setOnClickListener(new View.OnClickListener()
         {
@@ -53,7 +54,7 @@ public class Login extends AppCompatActivity {
     }
 
     private void goToMainActivity(String username) {
-        Intent goToMainActivity = new Intent(Login.this,MainActivity.class);
+        Intent goToMainActivity = new Intent(Login.this,MapsActivity.class);
         startActivity(goToMainActivity);
     }
 
