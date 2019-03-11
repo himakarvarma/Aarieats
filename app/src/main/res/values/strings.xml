@@ -1,4 +1,19 @@
 <resources>
-    <string name="app_name">Aarieats</string>
-    <string name="title_activity_maps">Map</string>
+<string name="app_name">Aarieats</string>
+<string name="shr_hint_username">Username</string>
+<string name="shr_hint_email">Email</string>
+<string name="shr_hint_name">Name</string>
+<string name="shr_hint_address">Address</string>
+<string name="shr_hint_city">City</string>
+<string name="shr_hint_state">State</string>
+<string name="shr_hint_password">Password</string>
+<string name="shr_button_next">Login</string>
+<string name="shr_button_cancel">Cancel</string>
+<string name="shr_app_name">Aarieats</string>
+<string name="register">Register</string>
+<string name="next">Next</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+<string name="hello_blank_fragment">Hello blank fragment</string>
+<string name="title_activity_maps">Map</string>
 </resources>
