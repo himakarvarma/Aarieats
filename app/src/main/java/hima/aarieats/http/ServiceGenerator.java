@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ServiceGenerator {
 
-    private static final String url = "http://18.221.97.253:3001";
+    private static final String url = "http://13.233.44.122:8087";
 
     private static Retrofit.Builder builder = new Retrofit.Builder()
             .baseUrl(url)

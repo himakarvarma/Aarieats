@@ -2,22 +2,34 @@ package hima.aarieats.http.models;
 
 public class LoginResponse {
 
-    int code;
-    String success;
+    String error;
 
-    public int getCode() {
-        return code;
+    Data data;
+
+    public String getError() {
+        return error;
     }
 
-    public void setCode(int code) {
-        this.code = code;
+    public void setError(String error) {
+        this.error = error;
     }
 
-    public String getSuccess() {
-        return success;
+    public Data getData() {
+        return data;
     }
 
-    public void setSuccess(String success) {
-        this.success = success;
+    public void setData(Data data) {
+        this.data = data;
+    }
+
+    private class Data {
+        String status;
+
+        public void setStatus(String status) {
+            this.status = status;
+        }
+        public String getStatus() {
+            return status;
+        }
     }
 }

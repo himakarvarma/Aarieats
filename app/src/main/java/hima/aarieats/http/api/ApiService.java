@@ -31,9 +31,9 @@ public class ApiService {
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 Log.i("apiservice",response.code()+"");
                 if(response.code() == 200) {
-                    if(response.body().getCode() == 200) {
+                    if(response.code() == 200) {
                         httpListner.onSuccess(HttpListner.ResponseStatus.LOGIN_SUCCESS, "sussess");
-                    } else if(response.body().getCode() == 204) {
+                    } else if(response.code() == 401) {
                         httpListner.onSuccess(HttpListner.ResponseStatus.LOGIN_AUTHENTICATION_FAILURE, "Authentication failure");
                     }
                 }
