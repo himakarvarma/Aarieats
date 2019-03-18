@@ -29,20 +29,20 @@ public class Login extends AppCompatActivity {
 
         userName = findViewById(R.id.username);
         password = findViewById(R.id.password);
-        //loginBtn = findViewById(R.id.loginBtn);
+        loginBtn = findViewById(R.id.loginBtn);
         registerBtn = findViewById(R.id.register_btn);
 
-//        loginBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                //goToMainActivity();
-//                if(userName.getText().toString().length() == 0 && password.getText().toString().length() == 0) {
-//                    Toast.makeText(Login.this,"Please enter user name and password",Toast.LENGTH_LONG).show();
-//                } else {
-//                    loginToServer(userName.getText().toString().trim(),password.getText().toString().trim());
-//                }
-//            }
-//        });
+        loginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //goToMainActivity();
+                if(userName.getText().toString().length() == 0 && password.getText().toString().length() == 0) {
+                    Toast.makeText(Login.this,"Please enter user name and password",Toast.LENGTH_LONG).show();
+                } else {
+                    loginToServer(userName.getText().toString().trim(),password.getText().toString().trim());
+                }
+            }
+        });
         registerBtn.setOnClickListener(new View.OnClickListener()
         {
             @Override
