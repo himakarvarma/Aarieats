@@ -9,7 +9,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import hima.aarieats.http.HttpListner;
-import hima.aarieats.http.api.AariEatsApi;
 import hima.aarieats.http.api.ApiService;
 
 public class Register extends AppCompatActivity {
@@ -33,17 +32,16 @@ public class Register extends AppCompatActivity {
 
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
-        number = findViewById(R.id.Number);
-        address = findViewById(R.id.address);
+        number = findViewById(R.id.phno);
+        address = findViewById(R.id.email);
         registerBtn = findViewById(R.id.registerBtn);
-
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(username.getText().toString().length() == 0 || password.getText().toString().length() == 0 || number.getText().toString().length() == 0 || address.getText().toString().length() == 0) {
                     Toast.makeText(Register.this,"Please enter user name and password",Toast.LENGTH_LONG).show();
                 } else {
-                    registerCallServer(username.getText().toString(), password.getText().toString());
+                    registerCallServer(username.getText().toString(), password.getText().toString(),number.getText().toString(),address.getText().toString());
                 }
             }
         });
@@ -55,9 +53,9 @@ public class Register extends AppCompatActivity {
         startActivity(goToLoginActivity);
     }
 
-    private void registerCallServer(String username,String password) {
+    private void registerCallServer(String username,String password,String phno,String email) {
         ApiService apiService = ApiService.getInstance();
-        apiService.register(username, password, new HttpListner() {
+        apiService.register(username, password,email,phno, new HttpListner() {
             @Override
             public void onSuccess(ResponseStatus status, String info) {
                 if(status == ResponseStatus.REGISTER_SUCCESS) {

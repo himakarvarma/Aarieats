@@ -1,7 +1,6 @@
 package hima.aarieats.http.models;
 
-public class LoginResponse {
-
+public class PlaceOrderResponse {
     String error;
 
     Data data;
@@ -23,12 +22,19 @@ public class LoginResponse {
     }
 
     private class Data {
-        String status;
+        String OrderId;
+        String Status;
+        public void setOrderId(String orderId) {
+            this.OrderId = orderId;
+        }
+        public String getOrderId() {
+            return OrderId;
+        }
         public void setStatus(String status) {
-            this.status = status;
+            this.Status = status;
         }
         public String getStatus() {
-            return status;
+            return Status;
         }
     }
 }

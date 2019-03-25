@@ -22,20 +22,21 @@
         android:layout_below="@+id/username"/>
 
     <EditText
+        android:id="@+id/phno"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/Number"
-        android:hint="MobileNumber"
+        android:layout_below="@+id/password"
         android:layout_marginTop="10dp"
-        android:layout_below="@+id/password"/>
+        android:hint="MobileNumber"
+        android:inputType="number" />
 
     <EditText
+        android:id="@+id/email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/address"
-        android:hint="UserAddress"
+        android:layout_below="@+id/phno"
         android:layout_marginTop="10dp"
-        android:layout_below="@+id/Number"/>
+        android:hint="@string/shr_hint_email" />
 
     <Button
         android:layout_width="wrap_content"
@@ -43,7 +44,7 @@
         android:id="@+id/registerBtn"
         android:layout_centerHorizontal="true"
         android:text="Register"
-        android:layout_below="@+id/address"
+        android:layout_below="@+id/email"
         android:layout_marginTop="20dp"/>
 
 </RelativeLayout>

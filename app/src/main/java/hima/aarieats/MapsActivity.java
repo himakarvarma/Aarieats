@@ -1,6 +1,7 @@
 package hima.aarieats;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 
@@ -11,6 +12,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -30,6 +32,13 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.TileOverlay;
+
+import java.util.List;
+
+import hima.aarieats.http.GetVendorListner;
+import hima.aarieats.http.HttpListner;
+import hima.aarieats.http.api.ApiService;
+import hima.aarieats.singletons.VendorData;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
@@ -122,12 +131,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         markerOptions.title("Current Location");
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
         currentLocationMarker = mMap.addMarker(markerOptions);
-
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 17);
+        mMap.animateCamera(cameraUpdate);
         //mMap.animateCamera(CameraUpdateFactory.zoomBy(5));
         if(client!=null) {
             LocationServices.FusedLocationApi.removeLocationUpdates(client,this);
         }
+        getVendorLocation();
     }
 
     public boolean checkLocationPermission() {
@@ -143,12 +153,59 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
+    public void getVendorLocation() {
+        ApiService apiService = ApiService.getInstance();
+        apiService.getVendors(new GetVendorListner() {
+            @Override
+            public void onSuccess(ResponseStatus status, List<Vendors> info) {
+                Log.i("MapActivity",info.size()+"");
+                drawVendorToMap(info);
+            }
+
+            @Override
+            public void onFailure(ResponseStatus status, String info) {
+
+            }
+        });
+    }
+
+    private void drawVendorToMap(List<Vendors> vendors) {
+        for(Vendors vendor : vendors) {
+            VendorData.getInstance().putVendors(vendor.email,vendor);
+            LatLng latLng = new LatLng(Double.valueOf(vendor.getVendorLat()), Double.valueOf(vendor.getVendorLng()));
+            MarkerOptions markerOptions = new MarkerOptions();
+            markerOptions.position(latLng);
+            markerOptions.title(vendor.getUserName());
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
+            Marker marker = mMap.addMarker(markerOptions);
+            marker.setTag(vendor);
+            mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                @Override
+                public boolean onMarkerClick(Marker marker) {
+                    Vendors vendor = ((Vendors)marker.getTag());
+                    if(vendor!=null) {
+                        Log.i("Marker", ((Vendors) marker.getTag()).getEmail());
+                        onClickMarker(((Vendors) marker.getTag()).getEmail());
+                    }
+                    return false;
+                }
+            });
+        }
+    }
+
+    private void onClickMarker(String email) {
+        Intent intent = new Intent(MapsActivity.this, ProductActivity.class);
+        intent.putExtra("vendorEmail", email);
+        startActivity(intent);
+
+    }
+
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         locationRequest = new LocationRequest();
-        locationRequest.setInterval(1000);
-        locationRequest.setFastestInterval(1000);
+//        locationRequest.setInterval(1000);
+//        locationRequest.setFastestInterval(1000);
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
