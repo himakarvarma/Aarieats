@@ -8,11 +8,16 @@ import android.location.Location;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -32,15 +37,17 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.TileOverlay;
+import com.onesignal.OneSignal;
 
 import java.util.List;
 
 import hima.aarieats.http.GetVendorListner;
 import hima.aarieats.http.HttpListner;
 import hima.aarieats.http.api.ApiService;
+import hima.aarieats.singletons.User;
 import hima.aarieats.singletons.VendorData;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
     private GoogleMap mMap;
 
@@ -54,6 +61,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     public static final int PERMISSION_REQUEST_LOCATION_CODE = 99;
 
+    private DrawerLayout drawerLayout;
+
     private double longitude;
 
     private double latitude;
@@ -65,10 +74,43 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkLocationPermission();
         }
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        drawNavBar();
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        OneSignal.setEmail(User.getInstance().getUserEmail());
+        OneSignal.sendTag("email",User.getInstance().getUserEmail());
+        OneSignal.sendTag("UserType","User");
+    }
+
+    private void drawNavBar() {
+        drawerLayout = findViewById(R.id.drawer_layout);
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+
+                        switch (menuItem.getItemId()) {
+                            case R.id.nav_orders :
+                                goToOrders();
+                                break;
+                        }
+
+                        drawerLayout.closeDrawers();
+
+                        return true;
+                    }
+                });
+    }
+
+    private void goToOrders() {
+        startActivity(new Intent(MapsActivity.this,VieworderActivity.class));
     }
 
     @Override

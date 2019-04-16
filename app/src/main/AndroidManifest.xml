@@ -20,9 +20,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:name=".BaseApplication"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".CartActivity"></activity>
+        <activity android:name=".VieworderActivity"></activity>
+        <activity android:name=".CartActivity" />
         <activity android:name=".ProductActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -38,7 +40,8 @@
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps" />
+            android:label="@string/title_activity_maps"
+            android:theme="@style/AppTheme1" />
         <activity android:name=".Register" />
         <activity android:name=".Login">
             <intent-filter>

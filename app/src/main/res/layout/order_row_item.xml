@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_margin="5dp"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_margin="10dp"
+                android:layout_height="100dp"
+                android:id="@+id/orderImg"
+                android:src="@mipmap/order"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:id="@+id/textOrderId"
+                android:layout_margin="10dp"
+                android:layout_toEndOf="@+id/orderImg"
+                android:text="OrderId:"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/textOrderId"
+                android:textSize="14sp"
+                android:id="@+id/orderIdValue"
+                android:layout_margin="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textOrderId"
+                android:textSize="14sp"
+                android:id="@+id/textUserEmail"
+                android:layout_toEndOf="@id/orderImg"
+                android:layout_margin="10dp"
+                android:text="User Email:"
+                android:textStyle="bold"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/textUserEmail"
+                android:layout_below="@+id/textOrderId"
+                android:textSize="14sp"
+                android:id="@+id/userEmailValue"
+                android:layout_margin="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textUserEmail"
+                android:textSize="14sp"
+                android:id="@+id/textOrderStatus"
+                android:layout_toEndOf="@id/orderImg"
+                android:layout_margin="10dp"
+                android:text="Status:"
+                android:textStyle="bold"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/textUserEmail"
+                android:layout_below="@+id/textUserEmail"
+                android:textSize="14sp"
+                android:id="@+id/userOrderStatus"
+                android:layout_margin="10dp"/>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</RelativeLayout>

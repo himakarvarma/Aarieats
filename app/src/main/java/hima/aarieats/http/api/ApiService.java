@@ -3,11 +3,14 @@ package hima.aarieats.http.api;
 import android.util.Log;
 import android.widget.Toast;
 
+import hima.aarieats.http.GetOrderListner;
 import hima.aarieats.http.GetVendorListner;
 import hima.aarieats.http.HttpListner;
 import hima.aarieats.http.PlaceOrderListner;
 import hima.aarieats.http.ProductListner;
 import hima.aarieats.http.ServiceGenerator;
+import hima.aarieats.http.models.GetOrderRequest;
+import hima.aarieats.http.models.GetOrderResponse;
 import hima.aarieats.http.models.GetProductRequest;
 import hima.aarieats.http.models.GetProductResponse;
 import hima.aarieats.http.models.GetVendorsResponse;
@@ -140,6 +143,29 @@ public class ApiService {
             @Override
             public void onFailure(Call<PlaceOrderResponse> call, Throwable t) {
                 listner.onFailure(PlaceOrderListner.ResponseStatus.FAILURE, t.getMessage());
+            }
+        });
+    }
+
+    public void getOrders(final GetOrderListner getOrderListner) {
+        String email = User.getInstance().getUserEmail();
+
+        GetOrderRequest getOrderRequest = new GetOrderRequest(email);
+        AariEatsApi aariEatsApi = ServiceGenerator.createRetrofit(AariEatsApi.class);
+        Call<GetOrderResponse> getOrderCall = aariEatsApi.getOrders(getOrderRequest);
+        getOrderCall.enqueue(new Callback<GetOrderResponse>() {
+            @Override
+            public void onResponse(Call<GetOrderResponse> call, Response<GetOrderResponse> response) {
+                if(response.code() == 200) {
+                    getOrderListner.onSuccess(GetOrderListner.ResponseStatus.SUCCESS,response.body().getData());
+                } else {
+                    getOrderListner.onFailure(GetOrderListner.ResponseStatus.INVALID_PARAMETERS,"Invalid Parameter");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GetOrderResponse> call, Throwable t) {
+                getOrderListner.onFailure(GetOrderListner.ResponseStatus.FAILURE,t.getMessage());
             }
         });
     }
