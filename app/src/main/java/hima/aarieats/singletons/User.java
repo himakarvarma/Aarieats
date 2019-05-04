@@ -1,5 +1,7 @@
 package hima.aarieats.singletons;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.HashMap;
 
 import hima.aarieats.Vendors;
@@ -10,6 +12,10 @@ public class User {
     private static User mUser;
 
     private String mUserEmail;
+
+    private String mLatLng;
+
+
 
 
     private User()
@@ -34,5 +40,13 @@ public class User {
 
     public String getUserEmail() {
         return mUserEmail;
+    }
+
+    public void setLatLng(String latLng) {
+        this.mLatLng = latLng;
+    }
+
+    public String getLatLng() {
+        return this.mLatLng;
     }
 }

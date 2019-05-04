@@ -12,10 +12,13 @@ public class PlaceOrderRequest {
     private String userEmail;
     private String vendorEmail;
     private List<PlaceOrderData> products;
+    private String latLng;
 
-    public PlaceOrderRequest(String userEmail, String vendorEmail) {
+
+    public PlaceOrderRequest(String userEmail, String vendorEmail,String latLng) {
         this.userEmail = userEmail;
         this.vendorEmail = vendorEmail;
+        this.latLng = latLng;
     }
 
     public void addProductList(String productId,int units,int total) {

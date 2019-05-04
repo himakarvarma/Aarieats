@@ -72,7 +72,8 @@ public class Cart {
 
     public PlaceOrderRequest getOrderDetails() {
         List<CartProducts> cartProductsList = new ArrayList<>(getProducts());
-        PlaceOrderRequest placeOrderRequest = new PlaceOrderRequest(User.getInstance().getUserEmail(),mCurrentVendor.getEmail());
+        User user = User.getInstance();
+        PlaceOrderRequest placeOrderRequest = new PlaceOrderRequest(user.getUserEmail(),mCurrentVendor.getEmail(),user.getLatLng());
         for(CartProducts products : cartProductsList) {
             placeOrderRequest.addProductList(products.getProduct().getProductId(),products.getUnit(),products.getTotal());
         }
