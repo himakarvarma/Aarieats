@@ -1,5 +1,7 @@
 package hima.aarieats.http.api;
 
+import hima.aarieats.http.models.GetOrderDetailsRequest;
+import hima.aarieats.http.models.GetOrderDetailsUserResponse;
 import hima.aarieats.http.models.GetOrderRequest;
 import hima.aarieats.http.models.GetOrderResponse;
 import hima.aarieats.http.models.GetProductRequest;
@@ -35,6 +37,10 @@ public interface AariEatsApi {
 
     @POST("/getorderuser")
     Call<GetOrderResponse> getOrders(@Body GetOrderRequest getOrderRequest);
+
+    @POST("/getuserorderdetails")
+
+    Call<GetOrderDetailsUserResponse> getOrderDetails(@Body GetOrderDetailsRequest getOrderDeailsRequest);
 
 
 }
