@@ -23,6 +23,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".OrderDetails"></activity>
         <activity android:name=".VieworderActivity" />
         <activity android:name=".CartActivity" />
         <activity android:name=".ProductActivity" />
@@ -51,6 +52,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
+
+        <meta-data
+            android:name="com.razorpay.ApiKey"
+            android:value="rzp_test_7BWzOJeq2kX2pU"
+            />
     </application>
 
 </manifest>

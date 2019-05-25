@@ -70,10 +70,10 @@ public class Cart {
         return mCurrentVendor;
     }
 
-    public PlaceOrderRequest getOrderDetails() {
+    public PlaceOrderRequest getOrderDetails(String type) {
         List<CartProducts> cartProductsList = new ArrayList<>(getProducts());
         User user = User.getInstance();
-        PlaceOrderRequest placeOrderRequest = new PlaceOrderRequest(user.getUserEmail(),mCurrentVendor.getEmail(),user.getLatLng());
+        PlaceOrderRequest placeOrderRequest = new PlaceOrderRequest(user.getUserEmail(),mCurrentVendor.getEmail(),user.getLatLng(),type);
         for(CartProducts products : cartProductsList) {
             placeOrderRequest.addProductList(products.getProduct().getProductId(),products.getUnit(),products.getTotal());
         }

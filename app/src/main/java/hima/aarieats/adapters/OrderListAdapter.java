@@ -9,7 +9,9 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import hima.aarieats.OrderDetails;
 import hima.aarieats.R;
+import hima.aarieats.VieworderActivity;
 import hima.aarieats.models.Order;
 
 public class OrderListAdapter extends ArrayAdapter {
@@ -42,7 +44,18 @@ public class OrderListAdapter extends ArrayAdapter {
             userEmail.setText(order.getUserEmail());
             orderStatus.setText(order.getOrderStatus());
         }
+
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToDetails(order);
+            }
+        });
         return convertView;
+    }
+
+    private void goToDetails(Order order) {
+        ((VieworderActivity)mContext).startProductDetailActivity(order);
     }
 
 }

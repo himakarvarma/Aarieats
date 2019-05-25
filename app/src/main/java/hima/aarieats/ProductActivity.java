@@ -147,7 +147,7 @@ public class ProductActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(HttpListner.ResponseStatus status, String info) {
-
+                        Toast.makeText(ProductActivity.this,"Connection Error Check Internet Connection or Server Error",Toast.LENGTH_LONG);
                     }
                 });
             }

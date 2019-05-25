@@ -4,26 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="CartActivity">
+    tools:context=".OrderDetails">
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/cartProducts">
-
-    </ListView>
-
-    <Spinner
+        android:id="@+id/orderDetailsListView" />
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/cartProducts"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/orderDetailsListView"
         android:layout_centerHorizontal="true"
-        android:id="@+id/paymentOption"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/paymentOption"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/placeOrderBtn"
-        android:text="Order"/>
+        android:id="@+id/priceText"
+        android:text="Total :"/>
+
 </RelativeLayout>

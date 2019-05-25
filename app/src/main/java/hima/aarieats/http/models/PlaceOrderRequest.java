@@ -13,12 +13,14 @@ public class PlaceOrderRequest {
     private String vendorEmail;
     private List<PlaceOrderData> products;
     private String latLng;
+    private String paymentType;
 
 
-    public PlaceOrderRequest(String userEmail, String vendorEmail,String latLng) {
+    public PlaceOrderRequest(String userEmail, String vendorEmail,String latLng,String paymentType) {
         this.userEmail = userEmail;
         this.vendorEmail = vendorEmail;
         this.latLng = latLng;
+        this.paymentType = paymentType;
     }
 
     public void addProductList(String productId,int units,int total) {

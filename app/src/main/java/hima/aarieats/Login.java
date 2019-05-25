@@ -56,6 +56,7 @@ public class Login extends AppCompatActivity {
     private void goToMainActivity(String username) {
         Intent goToMainActivity = new Intent(Login.this,MapsActivity.class);
         startActivity(goToMainActivity);
+        finish();
     }
 
     private  void loginToServer(final String username, String password) {

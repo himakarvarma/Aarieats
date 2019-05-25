@@ -2,6 +2,7 @@ package hima.aarieats;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -34,6 +35,12 @@ public class VieworderActivity extends AppCompatActivity {
                 mOrderListView.setAdapter(mOrderListAdapter);
             }
         });
+    }
+
+    public void startProductDetailActivity(Order order) {
+        Intent intent = new Intent(VieworderActivity.this,OrderDetails.class);
+        intent.putExtra("orderId",order.getOrderId());
+        startActivity(intent);
     }
 
     @Override

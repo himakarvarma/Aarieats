@@ -3,12 +3,15 @@ package hima.aarieats.http.api;
 import android.util.Log;
 import android.widget.Toast;
 
+import hima.aarieats.http.GetOrderDetailsListner;
 import hima.aarieats.http.GetOrderListner;
 import hima.aarieats.http.GetVendorListner;
 import hima.aarieats.http.HttpListner;
 import hima.aarieats.http.PlaceOrderListner;
 import hima.aarieats.http.ProductListner;
 import hima.aarieats.http.ServiceGenerator;
+import hima.aarieats.http.models.GetOrderDetailsRequest;
+import hima.aarieats.http.models.GetOrderDetailsUserResponse;
 import hima.aarieats.http.models.GetOrderRequest;
 import hima.aarieats.http.models.GetOrderResponse;
 import hima.aarieats.http.models.GetProductRequest;
@@ -44,12 +47,10 @@ public class ApiService {
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 Log.i("apiservice",response.code()+"");
                 if(response.code() == 200) {
-                    if(response.code() == 200) {
-                        User.getInstance().setUserEmail(username);
-                        httpListner.onSuccess(HttpListner.ResponseStatus.LOGIN_SUCCESS, "sussess");
-                    } else if(response.code() == 401) {
-                        httpListner.onSuccess(HttpListner.ResponseStatus.LOGIN_AUTHENTICATION_FAILURE, "Authentication failure");
-                    }
+                    User.getInstance().setUserEmail(username);
+                    httpListner.onSuccess(HttpListner.ResponseStatus.LOGIN_SUCCESS, "sussess");
+                } else {
+                    httpListner.onSuccess(HttpListner.ResponseStatus.LOGIN_AUTHENTICATION_FAILURE, "Authentication failure");
                 }
             }
 
@@ -69,11 +70,9 @@ public class ApiService {
             public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
                 Log.i("apiservice",response.code()+"");
                 if(response.code() == 200) {
-                    if(response.code() == 200) {
-                        httpListner.onSuccess(HttpListner.ResponseStatus.REGISTER_SUCCESS, "sussess");
-                    } else {
-                        httpListner.onSuccess(HttpListner.ResponseStatus.FAILURE, "Register failure");
-                    }
+                    httpListner.onSuccess(HttpListner.ResponseStatus.REGISTER_SUCCESS, "sussess");
+                } else {
+                    httpListner.onSuccess(HttpListner.ResponseStatus.FAILURE, "Register failure");
                 }
             }
 
@@ -123,6 +122,29 @@ public class ApiService {
             @Override
             public void onFailure(Call<GetProductResponse> call, Throwable t) {
                 httpListner.onFailure(HttpListner.ResponseStatus.FAILURE, t.getMessage());
+            }
+        });
+    }
+
+    public void getOrderDetails(String orderId, String email, final GetOrderDetailsListner getOrderDetailsListner) {
+        GetOrderDetailsRequest getOrderDetailsRequest = new GetOrderDetailsRequest(orderId,email);
+
+        AariEatsApi aariEatsApi = ServiceGenerator.createRetrofit(AariEatsApi.class);
+        Call<GetOrderDetailsUserResponse> getOrderDetailsCall = aariEatsApi.getOrderDetails(getOrderDetailsRequest);
+
+        getOrderDetailsCall.enqueue(new Callback<GetOrderDetailsUserResponse>() {
+            @Override
+            public void onResponse(Call<GetOrderDetailsUserResponse> call, Response<GetOrderDetailsUserResponse> response) {
+                if(response.code() == 200) {
+                    getOrderDetailsListner.onSuccess(GetOrderDetailsListner.ResponseStatus.SUCCESS,response.body().getData());
+                } else {
+                    getOrderDetailsListner.onFailure(GetOrderDetailsListner.ResponseStatus.INVALID_PARAMETERS,"Invalid Parameter");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GetOrderDetailsUserResponse> call, Throwable t) {
+                getOrderDetailsListner.onFailure(GetOrderDetailsListner.ResponseStatus.FAILURE,t.getMessage());
             }
         });
     }
