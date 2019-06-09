@@ -9,6 +9,8 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/paymentOption"
         android:id="@+id/cartProducts">
 
     </ListView>
@@ -16,14 +18,18 @@
     <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/cartProducts"
+        android:layout_above="@+id/placeOrderBtn"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
         android:id="@+id/paymentOption"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/paymentOption"
         android:layout_centerHorizontal="true"
         android:id="@+id/placeOrderBtn"
+        android:layout_marginBottom="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_alignParentBottom="true"
         android:text="Order"/>
 </RelativeLayout>

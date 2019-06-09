@@ -23,7 +23,14 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".OrderDetails"></activity>
+        <activity android:name=".SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".OrderDetails" />
         <activity android:name=".VieworderActivity" />
         <activity android:name=".CartActivity" />
         <activity android:name=".ProductActivity" />
@@ -45,18 +52,13 @@
             android:theme="@style/AppTheme1" />
         <activity android:name=".Register" />
         <activity android:name=".Login">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
 
         <meta-data
             android:name="com.razorpay.ApiKey"
-            android:value="rzp_test_7BWzOJeq2kX2pU"
-            />
+            android:value="rzp_test_7BWzOJeq2kX2pU" />
     </application>
 
 </manifest>

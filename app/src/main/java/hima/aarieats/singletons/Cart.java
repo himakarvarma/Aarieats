@@ -1,5 +1,7 @@
 package hima.aarieats.singletons;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -46,9 +48,12 @@ public class Cart {
         if(orderMap!=null) {
             if(mCurrentVendor==null) {
                 setCurrentVendor(vendor);
+                Log.i("CurrentVendorAddToCart",vendor.getEmail());
             }
             if(!checkIfSameVendor(vendor)) {
                 orderMap.clear();
+                setCurrentVendor(vendor);
+                Log.i("CurrentVendorAddToCart",vendor.getEmail());
             }
             orderMap.put(productId,product);
         }
